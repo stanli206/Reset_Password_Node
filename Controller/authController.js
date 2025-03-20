@@ -28,7 +28,7 @@ export const registerUser = async (req, res) => {
 
     // Hash the password
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(password, salt);
+     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Create new user
     user = new User({
@@ -96,7 +96,7 @@ export const forgotPassword = async (req, res) => {
     user.resetTokenExpires = Date.now() + 3600000; // 1 hour
     await user.save();
 
-    const resetLink = `http://localhost:3000/reset-password/${resetToken}`;
+    const resetLink = `http://localhost:5173/reset-password/${resetToken}`;
 
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
@@ -105,7 +105,7 @@ export const forgotPassword = async (req, res) => {
       html: `<p>Click <a href="${resetLink}">here</a> to reset your password. This link expires in 1 hour.</p>`,
     });
 
-    res.json({ message: "Password reset email sent" });
+    res.json({ message: "Password reset email sent", user });
   } catch (error) {
     res.status(500).json({ message: "Server error", error: error.message });
   }
