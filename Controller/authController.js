@@ -96,7 +96,7 @@ export const forgotPassword = async (req, res) => {
     user.resetTokenExpires = Date.now() + 3600000; // 1 hour
     await user.save();
 
-    const resetLink = `https://resetpasswordtask.netlify.app/api/users/reset-password/${resetToken}`; 
+    const resetLink = `https://resetpasswordtask.netlify.app/reset-password/${resetToken}`;
 
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
