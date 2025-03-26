@@ -9,18 +9,16 @@ const app = express();
 app.use(cors());
 app.use(
   cors({
-    origin: "http://localhost:5173", // Replace with your frontend URL
+    origin: "http://localhost:5173", //
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
 );
-const port = process.env.PORT || 5003;
+const port = process.env.PORT || 5000;
 app.use(express.json());
 connectDB();
 
 app.use("/api/users", userRoutes);
-
-// app.use("/api/auth", userRouter);
 
 app.listen(port, () => {
   console.log(`server is running on port ${port}`);
