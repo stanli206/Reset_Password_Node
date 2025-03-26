@@ -96,7 +96,7 @@ export const forgotPassword = async (req, res) => {
     user.resetTokenExpires = Date.now() + 3600000; // 1 hour
     await user.save();
 
-    const resetLink = `http://localhost:5173/reset-password/${resetToken}`;
+    const resetLink = `https://reset-password-flow-task.onrender.com/api/users/reset-password/${resetToken}`; //http://localhost:5173/reset-password
 
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
